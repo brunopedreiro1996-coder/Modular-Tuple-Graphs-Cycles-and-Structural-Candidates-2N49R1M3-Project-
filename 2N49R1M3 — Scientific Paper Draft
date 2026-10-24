@@ -1,0 +1,87 @@
+# 2N49R1M3 — Scientific Paper Draft
+
+**Title:** Structural Properties of Semiprime Tuples and the Cut Conjecture: A Unified Model for Fermat and Solinas Classes
+
+**Author:** Bruno Paiva Viana  
+**Date:** October 24, 2026
+
+---
+
+### Abstract
+We present an independent mathematical framework for analyzing the structure of semiprimes $N = p \cdot q$. By introducing the symmetric 5-tuple $(w, x, N, y, z)$ defined via the fundamental sum $S = p+q$ and difference $D = q-p$, we map the modular, geometric, and binary properties of structured semiprimes. We investigate exact modular laws (modulo 3, 4, 5, 6, 12, 30, and 60) acting on the tuple points, and we formalize the **Cut Conjecture** (Conjectura dos Cortes), a parametric family yielding semiprimes $N = P \cdot Q$ with $\varphi(N) = 2^m \pm 2^s$. This framework serves as a unifying model that maps classical Fermat and Solinas-type classes, while clarifying key boundaries for integer factorization heuristics.
+
+---
+
+### 1. Introduction and Notation
+Let $N = p \cdot q$ be a semiprime, where $p < q$ are odd primes. We define the fundamental additive variables:
+*   **Sum:** $S = p + q$
+*   **Difference:** $D = q - p$
+
+To analyze the neighborhood of $N$, we establish the symmetric 5-tuple $(w, x, N, y, z)$ defined as:
+$$
+\begin{aligned}
+w &= N - S = (p-1)(q-1) - 1 = \varphi(N) - 1 \\
+x &= N - D = (p-1)(q+1) + 1 \\
+y &= N + D = (p+1)(q-1) + 1 \\
+z &= N + S = (p+1)(q+1) - 1 = \psi(N) - 1
+\end{aligned}
+$$
+where $w < x < N < y < z$.
+
+From these expressions, we derive the fundamental symmetric identity:
+$$w + z = x + y = 2N$$
+
+Furthermore, the distances between the tuple points map directly to the prime factors:
+$$x - w = z - y = 2p \quad \text{and} \quad z - x = y - w = 2q$$
+This representation is algebraically equivalent to Fermat's factorization method, where $N = t^2 - s^2$ with $t = S/2$ and $s = D/2$. 
+
+---
+
+### 2. Theorems and Modular Laws
+
+| ID | Statement | Status |
+|:---|:---|:---|
+| **T1** | $w, x, y, z$ are odd; $w, z \equiv 3 \pmod 4$; $x, y \equiv 1 \pmod 4$. | Proven |
+| **T2** | **Rule of 3:** Exactly one of the four tuple points is $\equiv 3 \pmod 6$. The mapping is determined by the signature $(p \pmod 6, q \pmod 6)$: <br> $(1,1) \to z$, $(5,5) \to w$, $(1,5) \to y$, $(5,1) \to x$. | Proven |
+| **T3** | **Rule of 5:** If $p, q \in \{1,4\} \pmod 5$, no tuple point is a multiple of 5; in the other 12 of 16 possible pairs, exactly one point is a multiple of 5. | Proven |
+| **T4** | Distance and algebraic identities: $S^2 - D^2 = 4N$, $w+z = x+y = 2N$. | Proven |
+| **T5** | **Fermat/Mersenne Boundary:** <br> $w = 2^k - 1 \iff p, q$ are Fermat primes. <br> $z = 2^k - 1 \iff p, q$ are Mersenne primes. <br> $x = 2^k + 1 \iff p$ is Fermat, $q$ is Mersenne. <br> $y = 2^k + 1 \iff p$ is Mersenne, $q$ is Fermat. | Proven |
+| **T6** | The Quadratic Residue (QR) Sieve never rejects the true $t$ of $N = t^2 - s^2$. | Proven |
+| **T7** | Let $a, b$ be the closest primes surrounding $\sqrt{N}$. If $a+b > p+q$, then $N < ab$ (the converse is false). | Proven |
+| **T8** | $N < ab \iff \sqrt{N}$ falls in the lower half of the interval $(a, b)$. | Empirical (100% of 3174 cases) |
+| **T9** | **Cuts:** $N - P - Q = 2^m + \sigma \cdot 2^s - 1$. Rule modulo 3: $\sigma = +1$ requires an odd $t$, $\sigma = -1$ requires an even $t$. | Proven |
+| **T10** | **Mersenne $\times$ Fermat:** Corresponds to the case $\sigma = -1, A = 1$ ($P = 2^a + 1$, $Q = 2^c - 1$): $m = a + c$, $s = a + 1$, and $x$ (or $y$) $= 2^m + 1$. | Proven |
+| **T11** | For $p \ge 7$, a tuple intersects at most two adjacent binary bands $[2^k, 2^{k+1})$. | Empirical |
+| **T12** | **Size Law:** The gap between adjacent primes behaves as $\sim \ln N$; thus $\text{gap}(a,b)/\sqrt{N}$ scales as $2^{-n}$ along growing progressions. | Proven & Measured |
+| **T13** | Graph $N \mapsto \{w, x, y, z\}$: average degree $\approx 4\mathfrak{S} \ln \ln x / \ln x \to 0$. | Heuristic & Measured |
+| **T14** | Proth (1878) and Pocklington (1914) primality tests successfully certify $P$ and $Q$ when $k < 2^e$. | Classical |
+
+---
+
+### 3. The Cut Conjecture (Conjectura dos Cortes)
+Let $\sigma = \pm 1$, $m > s \ge 2$, and $t = m - s$. We define a cyclotomic parameter $C = 2^t + \sigma = A \cdot B$, where $A = 2^u + \sigma$ (with $u | t$; if $\sigma = +1$, we require $t/u$ to be odd and $\ge 3$). 
+
+For any exponents $a + b = s$ ($a, b \ge 1$), we define the candidate integers:
+$$P = 2^a \cdot A + 1 \quad \text{and} \quad Q = 2^b \cdot B + 1$$
+
+**Conjecture 1 (Cuts for $\sigma = +, m = 2n$):**  
+For every $n \ge 3$, there exists at least one pair $(a, b)$ such that $P$ and $Q$ are both prime.  
+*Evidence:* Experimentally verified for all $n$ from 3 up to 2321 without any empty intervals.
+
+#### Unified Model: Fermat and Solinas Limits
+The parametrization $\varphi(N) = 2^m \pm 2^s$ behaves as a grand unifier for structured semiprimes:
+1.  **Fermat $\times$ Fermat (Lower Band Limit):** When $\sigma = +1$, $t$ is a power of 2, and the cyclotomic blocks are trivial ($B = 1$), the structure collapses to the product of two classic Fermat primes ($P = F_j, Q = F_k$). Geometrically, this anchors the lower bound $w$ exactly at the start of the binary band.
+2.  **Solinas $\times$ Solinas (Cyclotomic Generalization):** Since the blocks $A$ and $B$ originate from cyclotomic factors of $2^t \pm 1$, the resulting primes $P$ and $Q$ inherit the low binary weight structure, generating a controlled family of Solinas-type and Proth-type primes. This explains the exceptionally high density of smooth residues and the absolute efficiency of Proth's theorem ($T14$) in certifying these points.
+
+---
+
+### 4. Negative Results & Heuristic Boundaries
+To prevent the duplication of unsuccessful factorization paths, we document the following structural limits:
+*   **Functions of $N$ only:** Any parameter computed solely from $N$, $\sqrt{N}$, or digit suffixes (e.g., neighbors of $\sqrt{N}$, binary positions) carries **no information** about $p, q,$ or the ratio $k = q/p$.
+*   **Tuple Circularity:** Accessing the points $w, x, y, z, \varphi,$ or $\psi$ requires prior knowledge of $p$ and $q$, creating a circular dependency. The tuple possesses exactly **one** free degree of freedom ($S$ or $D$).
+*   **Anchor Fishing:** Searching for prime points at distances $2p, 2q$ from $N$ is equivalent to Fermat's factorization method and does not yield any computational speedup.
+
+---
+
+### 5. Conclusion
+The $2N49R1M3$ framework maps the algebraic, binary, and geometric symmetries of semiprimes. While it does not reduce the asymptotic complexity of factoring general semiprimes (such as RSA keys), it reveals highly structured families (Cuts, Solinas $\times$ Solinas) and provides a rigorous modular taxonomy for the additive neighborhood of products of primes.
